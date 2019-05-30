@@ -20,7 +20,6 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-
       onScaleStart: (ScaleStartDetails details) {
         _scaleBefore = _scale;
         _previousOffset = _offset;
