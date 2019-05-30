@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 
 class CurvePainter extends CustomPainter {
 
-  CurvePainter({@required this.startX, @required this.startY, @required this.endX, @required this.endY});
   final double startX;
   final double startY;
   final double endX;
   final double endY;
+  final int color;
+
+  CurvePainter({
+    @required this.startX, 
+    @required this.startY, 
+    @required this.endX, 
+    @required this.endY,
+    this.color = 0xffff7fff
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
 
     Paint paint = Paint()
-      ..color = Color(0xffff7f17)
+      ..color = Color(color)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
 

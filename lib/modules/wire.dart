@@ -13,15 +13,21 @@ class Wire extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: CurvePainter(startX: startX, startY: startY, endX: endX, endY: endY),
+      painter: CurvePainter(
+        startX: startX, 
+        startY: startY, 
+        endX: endX, 
+        endY: endY,
+        color: 0xffff7f17
+      ),
       child: Stack(
         children: <Widget>[
           Transform(
-            transform: Matrix4.translationValues(startX - 7, startY - 7, 0.0),
+            transform: Matrix4.translationValues(startX - 7.0, startY - 7.0, 0.0),
             child: Socket(filled: true)
           ),
           Transform(
-            transform: Matrix4.translationValues(endX - 7, endY - 7, 0.0),
+            transform: Matrix4.translationValues(endX - 7.0, endY - 7.0, 0.0),
             child: Socket(filled: true)
           )
         ],

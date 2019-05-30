@@ -48,7 +48,7 @@ class _MarkovState extends State<Markov> {
       name: 'Markov Chain',
       inputs: ['clock in'],
       outputs: ['cv out', 'gate out'],
-      content: Container(
+      child: Container(
         color: Color(0xffff00ff)
       )
     );

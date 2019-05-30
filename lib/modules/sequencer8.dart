@@ -17,8 +17,8 @@ class Sequencer8 extends StatelessWidget {
       name: 'Sequencer 8',
       inputs: ['clock in'],
       outputs: ['cv out', 'gate out'],
-      content: Container(
-        child: Text('Coddjd ldkd'),
+      child: Container(
+        child: Text('Sequencer will placed here'),
       )
     );
   }
