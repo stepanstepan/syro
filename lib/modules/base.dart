@@ -76,7 +76,8 @@ class _BaseState extends State<Base> {
           height: height,
           decoration: BoxDecoration(
             color: Color(0xff2c2c2c),
-            borderRadius: BorderRadius.circular(10.0)
+            borderRadius: BorderRadius.circular(10.0),
+            border: new Border.all(color: Color(0xff0d0d0d))
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

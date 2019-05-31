@@ -2,9 +2,15 @@ import 'package:flutter/cupertino.dart';
 
 class Socket extends StatelessWidget {
 
-  Socket({this.filled = false, this.name = ''});
+  
   final bool filled;
   final String name;
+
+  Socket({
+    this.filled = false, 
+    this.name = ''
+  });
+
 
   @override
   Widget build(BuildContext context) {
