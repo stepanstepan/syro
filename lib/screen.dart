@@ -44,8 +44,8 @@ class _ScreenState extends State<Screen> {
             ..scale(_scale),
           child: Stack(
             children: <Widget>[
-              Sequencer8(x: 100, y: 200),
-              Markov(x: 400, y: 500),
+              Sequencer8(position: new Offset(100, 200)),
+              Markov(position: new Offset(400, 500)),
               Wire(start: new Offset(117, 383), end: new Offset(417, 515))
             ],
           )

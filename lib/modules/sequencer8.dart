@@ -3,17 +3,15 @@ import 'package:sequencer/modules/base.dart';
 
 class Sequencer8 extends StatelessWidget {
 
-  Sequencer8({@required this.x, @required this.y});
-  final double x;
-  final double y;
+  Offset position;
+  Sequencer8({@required this.position});
 
   @override
   Widget build(BuildContext context) {
     return Base(
       width: 400,
       height: 200,
-      x: x,
-      y: y,
+      position: position,
       name: 'Sequencer 8',
       inputs: ['clock in'],
       outputs: ['cv out', 'gate out'],

@@ -6,20 +6,18 @@ import 'package:sequencer/modules/base.dart';
 
 class Markov extends StatefulWidget {
 
-  Markov({@required this.x, @required this.y});
-  final double x;
-  final double y;
+  Offset position;
+  Markov({@required this.position});
 
   @override
-  State<Markov> createState() => _MarkovState(x: x, y: y);
+  State<Markov> createState() => _MarkovState(position: position);
 
 }
 
 class _MarkovState extends State<Markov> {
 
-  _MarkovState({@required this.x, @required this.y});
-  final double x;
-  final double y;
+  Offset position;
+  _MarkovState({@required this.position});
 
   onTap() {
     var _chain = new MarkovChain<String>(1);
@@ -43,8 +41,7 @@ class _MarkovState extends State<Markov> {
     return Base(
       width: 300,
       height: 150,
-      x: x,
-      y: y,
+      position: position,
       name: 'Markov Chain',
       inputs: ['clock in'],
       outputs: ['cv out', 'gate out'],

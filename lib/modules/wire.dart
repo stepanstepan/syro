@@ -38,10 +38,8 @@ class _WireState extends State<Wire> {
           isComplex: true, 
           willChange: true,
           painter: CurvePainter(
-            startX: start.dx, 
-            startY: start.dy, 
-            endX: end.dx, 
-            endY: end.dy,
+            start: start,
+            end: end,
             color: 0xffff7f17
           )
         ),

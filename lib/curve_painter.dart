@@ -5,17 +5,13 @@ const int DEFAULT_COLOR = 0xffff7fff;
 
 class CurvePainter extends CustomPainter {
 
-  double startX;
-  double startY;
-  double endX;
-  double endY;
+  Offset start;
+  Offset end;
   int color;
 
   CurvePainter({
-    @required this.startX, 
-    @required this.startY, 
-    @required this.endX, 
-    @required this.endY,
+    @required this.start, 
+    @required this.end, 
     this.color = DEFAULT_COLOR
   });
 
@@ -28,17 +24,16 @@ class CurvePainter extends CustomPainter {
       ..strokeWidth = 3.0;
 
     Path path = Path();
-    path.moveTo(startX, startY);
-    // path.cubicTo(startX, endY, endX, startY, endX, endY);
-    final Offset middle = new Offset(startX + (endX - startX) / 2, startY + (endY - startY) / 2);
-    final double distance = sqrt(pow(endX - startX, 2) + pow(endY - startY, 2));
-    // final double arc = atan((middle.dx - startX) / (middle.dy - startY));
+    path.moveTo(start.dx, start.dy);
+    final Offset middle = new Offset(start.dx + (end.dx - start.dx) / 2, start.dy + (end.dy - start.dy) / 2);
+    final double distance = sqrt(pow(end.dx - start.dx, 2) + pow(end.dy - start.dy, 2));
+
 
     path.quadraticBezierTo(
       middle.dx,
       middle.dy + distance * .25,
-      endX, 
-      endY
+      end.dx, 
+      end.dy
     );
     canvas.drawPath(path, paint);
     

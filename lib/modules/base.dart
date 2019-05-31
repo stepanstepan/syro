@@ -4,8 +4,7 @@ import 'package:sequencer/modules/socket.dart';
 
 class Base extends StatefulWidget {
 
-  double x;
-  double y;
+  Offset position;
   final double width;
   final double height;
   final String name;
@@ -16,8 +15,7 @@ class Base extends StatefulWidget {
   Base({
     @required this.width, 
     @required this.height, 
-    @required this.x, 
-    @required this.y, 
+    @required this.position,
     @required this.name, 
     @required this.inputs, 
     @required this.outputs,
@@ -26,8 +24,7 @@ class Base extends StatefulWidget {
 
   @override
   State<Base> createState() => _BaseState(
-    x: x,
-    y: y,
+    position: position,
     width: width,
     height: height,
     name: name,
@@ -40,8 +37,7 @@ class Base extends StatefulWidget {
 
 class _BaseState extends State<Base> {
 
-  double x;
-  double y;
+  Offset position;
   final double width;
   final double height;
   final String name;
@@ -52,8 +48,7 @@ class _BaseState extends State<Base> {
   _BaseState({
     @required this.width, 
     @required this.height, 
-    @required this.x, 
-    @required this.y, 
+    @required this.position,
     @required this.name, 
     @required this.inputs, 
     @required this.outputs,
@@ -63,12 +58,11 @@ class _BaseState extends State<Base> {
   @override
   Widget build(BuildContext context) {
     return Transform(
-        transform: Matrix4.translationValues(x, y, 0.0),
+        transform: Matrix4.translationValues(position.dx, position.dy, 0.0),
         child: GestureDetector(
         onPanUpdate: (DragUpdateDetails details) {
           setState(() {
-            x = x + details.delta.dx;
-            y = y + details.delta.dy;
+            position += details.delta;
           });
         },
         child: Container(
