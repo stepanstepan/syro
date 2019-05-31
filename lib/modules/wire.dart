@@ -4,39 +4,29 @@ import 'package:sequencer/modules/socket.dart';
 
 class Wire extends StatefulWidget {
 
-  double startX;
-  double startY;
-  double endX;
-  double endY;
+  Offset start;
+  Offset end;
 
   Wire({
-    @required this.startX, 
-    @required this.startY, 
-    @required this.endX, 
-    @required this.endY
+    @required this.start, 
+    @required this.end
   });
 
   @override
   State<Wire> createState() => _WireState(
-    startX: startX,
-    startY: startY,
-    endX: endX,
-    endY: endX
+    start: start,
+    end: end
   );
 }
 
 class _WireState extends State<Wire> {
 
-  double startX;
-  double startY;
-  double endX;
-  double endY;
+  Offset start;
+  Offset end;
 
   _WireState({
-    @required this.startX, 
-    @required this.startY, 
-    @required this.endX, 
-    @required this.endY
+    @required this.start, 
+    @required this.end
   });
 
   @override
@@ -48,34 +38,32 @@ class _WireState extends State<Wire> {
           isComplex: true, 
           willChange: true,
           painter: CurvePainter(
-            startX: startX, 
-            startY: startY, 
-            endX: endX, 
-            endY: endY,
+            startX: start.dx, 
+            startY: start.dy, 
+            endX: end.dx, 
+            endY: end.dy,
             color: 0xffff7f17
           )
         ),
         Transform(
-          transform: Matrix4.translationValues(startX - 7.0, startY - 7.0, 0.0),
+          transform: Matrix4.translationValues(start.dx - 7.0, start.dy - 7.0, 0.0),
           child: GestureDetector(
             behavior: HitTestBehavior.deferToChild,
             onPanUpdate: (DragUpdateDetails details) {
               setState(() {
-                startX = startX + details.delta.dx;
-                startY = startY + details.delta.dy;
+                start += details.delta;
               });
             },
             child: Socket(filled: true)
           )
         ),
         Transform(
-          transform: Matrix4.translationValues(endX - 7.0, endY - 7.0, 0.0),
+          transform: Matrix4.translationValues(end.dx - 7.0, end.dy - 7.0, 0.0),
           child: GestureDetector(
             behavior: HitTestBehavior.deferToChild,
             onPanUpdate: (DragUpdateDetails details) {
               setState(() {
-                endX = endX + details.delta.dx;
-                endY = endY + details.delta.dy;
+                end += details.delta;
               });
             },
             child: Socket(filled: true)

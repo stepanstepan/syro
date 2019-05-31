@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 const int DEFAULT_COLOR = 0xffff7fff;
 
@@ -28,7 +29,17 @@ class CurvePainter extends CustomPainter {
 
     Path path = Path();
     path.moveTo(startX, startY);
-    path.cubicTo(startX, endY, endX, startY, endX, endY);
+    // path.cubicTo(startX, endY, endX, startY, endX, endY);
+    final Offset middle = new Offset(startX + (endX - startX) / 2, startY + (endY - startY) / 2);
+    final double distance = sqrt(pow(endX - startX, 2) + pow(endY - startY, 2));
+    // final double arc = atan((middle.dx - startX) / (middle.dy - startY));
+
+    path.quadraticBezierTo(
+      middle.dx,
+      middle.dy + distance * .25,
+      endX, 
+      endY
+    );
     canvas.drawPath(path, paint);
     
   }
