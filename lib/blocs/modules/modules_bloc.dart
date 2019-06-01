@@ -1,0 +1,88 @@
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+import 'package:sequencer/blocs/modules/modules_event.dart';
+import 'package:sequencer/blocs/modules/modules_state.dart';
+import 'package:sequencer/models/module.dart';
+
+class ModulesBloc extends Bloc<ModulesEvent, ModulesState> {
+  final modulesRepository;
+
+  ModulesBloc({@required this.modulesRepository});
+
+  @override
+  ModulesState get initialState => ModulesLoading();
+
+  @override
+  Stream<ModulesState> mapEventToState(
+    ModulesState currentState,
+    ModulesEvent event,
+  ) async* {
+    if (event is LoadModules) {
+      yield* _mapLoadModulesToState();
+    } else if (event is AddModule) {
+      yield* _mapAddModuleToState(currentState, event);
+    } else if (event is UpdateModule) {
+      yield* _mapUpdateModuleToState(currentState, event);
+    } else if (event is DeleteModule) {
+      yield* _mapDeleteModuleToState(currentState, event);
+    }
+  }
+
+  Stream<ModulesState> _mapLoadModulesToState() async* {
+    try {
+      final position = new Offset(100, 100);
+      final modules = [new Module(position, ['cv in', 'gate in'], ['cv out'], 'sequencer')];
+      yield ModulesLoaded(
+        modules.map(Module.fromEntity).toList()
+      );
+    } catch (_) {
+      print('Modules not loaded');
+    }
+  }
+
+  Stream<ModulesState> _mapAddModuleToState(
+    ModulesState currentState,
+    AddModule event,
+  ) async* {
+    if (currentState is ModulesLoaded) {
+      final List<Module> updatedModules = List.from(currentState.modules)
+        ..add(event.module);
+      yield ModulesLoaded(updatedModules);
+      _saveModules(updatedModules);
+    }
+  }
+
+  Stream<ModulesState> _mapUpdateModuleToState(
+    ModulesState currentState,
+    UpdateModule event,
+  ) async* {
+    if (currentState is ModulesLoaded) {
+      final List<Module> updatedModules = currentState.modules.map((module) {
+        return module.id == event.updatedModule.id ? event.updatedModule : module;
+      }).toList();
+      yield ModulesLoaded(updatedModules);
+      _saveModules(updatedModules);
+    }
+  }
+
+  Stream<ModulesState> _mapDeleteModuleToState(
+    ModulesState currentState,
+    DeleteModule event,
+  ) async* {
+    if (currentState is ModulesLoaded) {
+      final updatedModules =
+          currentState.modules.where((module) => module.id != event.module.id).toList();
+      yield ModulesLoaded(updatedModules);
+      _saveModules(updatedModules);
+    }
+  }
+  
+  Future _saveModules(List<Module> modules) {
+    return modulesRepository.saveModules(
+      modules.map((module) => module.toEntity()).toList()
+    );
+  }
+
+}
