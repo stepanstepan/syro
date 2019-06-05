@@ -4,11 +4,16 @@ import 'package:sequencer/modules/base.dart';
 class Sequencer8 extends StatelessWidget {
 
   Offset position;
-  Sequencer8({@required this.position});
+  String id;
+  Sequencer8({
+    @required this.position,
+    @required this.id
+  });
 
   @override
   Widget build(BuildContext context) {
     return Base(
+      id: id,
       width: 400,
       height: 200,
       position: position,

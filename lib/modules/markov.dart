@@ -7,7 +7,11 @@ import 'package:sequencer/modules/base.dart';
 class Markov extends StatefulWidget {
 
   Offset position;
-  Markov({@required this.position});
+  String id;
+  Markov({
+    @required this.position,
+    @required this.id
+  });
 
   @override
   State<Markov> createState() => _MarkovState(position: position);
