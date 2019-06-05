@@ -18,7 +18,7 @@ class Sequencer8 extends StatelessWidget {
 
     return Base(
       width: 500,
-      height: 400,
+      height: 250,
       position: position,
       name: 'Sequencer 8',
       inputs: ['clock in'],
