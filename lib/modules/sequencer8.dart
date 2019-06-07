@@ -16,19 +16,19 @@ class Sequencer8 extends StatelessWidget {
   Widget build(BuildContext context) {
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
 
-    return BlocBuilder<CounterEvent, Offset>(
+    return BlocBuilder<CounterEvent, List<Offset>>(
       bloc: _counterBloc,
-      builder: (BuildContext context, Offset count) {
+      builder: (BuildContext context, List<Offset> count) {
         return Base(
           width: 500,
           height: 250,
-          position: count,
+          position: count[0],
           name: 'Sequencer 8',
           inputs: ['clock in'],
           outputs: ['cv out', 'gate out'],
-          child: BlocBuilder<CounterEvent, Offset>(
+          child: BlocBuilder<CounterEvent, List<Offset>>(
             bloc: _counterBloc,
-            builder: (BuildContext context, Offset count) {
+            builder: (BuildContext context, List<Offset> count) {
               return Column(
                 children: <Widget>[
                   Container(
