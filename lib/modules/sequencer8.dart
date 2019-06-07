@@ -16,43 +16,48 @@ class Sequencer8 extends StatelessWidget {
   Widget build(BuildContext context) {
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
 
-    return Base(
-      width: 500,
-      height: 250,
-      position: position,
-      name: 'Sequencer 8',
-      inputs: ['clock in'],
-      outputs: ['cv out', 'gate out'],
-      child: BlocBuilder<CounterEvent, int>(
-        bloc: _counterBloc,
-        builder: (BuildContext context, int count) {
-          return Column(
-            children: <Widget>[
-              Container(
-                child: Text('$count'),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                child: FloatingActionButton(
-                  child: Icon(Icons.add),
-                  onPressed: () {
-                    _counterBloc.dispatch(CounterEvent.increment);
-                  },
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                child: FloatingActionButton(
-                  child: Icon(Icons.remove),
-                  onPressed: () {
-                    _counterBloc.dispatch(CounterEvent.decrement);
-                  },
-                ),
-              ),
-            ],
-          );
-        }
-      )
+    return BlocBuilder<CounterEvent, Offset>(
+      bloc: _counterBloc,
+      builder: (BuildContext context, Offset count) {
+        return Base(
+          width: 500,
+          height: 250,
+          position: count,
+          name: 'Sequencer 8',
+          inputs: ['clock in'],
+          outputs: ['cv out', 'gate out'],
+          child: BlocBuilder<CounterEvent, Offset>(
+            bloc: _counterBloc,
+            builder: (BuildContext context, Offset count) {
+              return Column(
+                children: <Widget>[
+                  Container(
+                    child: Text('$count'),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: FloatingActionButton(
+                      child: Icon(Icons.add),
+                      onPressed: () {
+                        _counterBloc.dispatch(CounterEvent.increment);
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: FloatingActionButton(
+                      child: Icon(Icons.remove),
+                      onPressed: () {
+                        _counterBloc.dispatch(CounterEvent.decrement);
+                      },
+                    ),
+                  ),
+                ],
+              );
+            }
+          )
+        );
+      }
     );
 
     // return BlocBuilder<CounterEvent, int>(

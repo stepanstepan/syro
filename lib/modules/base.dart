@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:sequencer/modules/socket.dart';
 
-class Base extends StatefulWidget {
 
-  Offset position;
+class Base extends StatelessWidget {
+
+  final Offset position;
   final double width;
   final double height;
   final String name;
@@ -21,39 +22,6 @@ class Base extends StatefulWidget {
     @required this.outputs,
     @required this.child
   });
-
-  @override
-  State<Base> createState() => _BaseState(
-    position: position,
-    width: width,
-    height: height,
-    name: name,
-    inputs: inputs,
-    outputs: outputs,
-    child: child
-  );
-
-}
-
-class _BaseState extends State<Base> {
-
-  Offset position;
-  final double width;
-  final double height;
-  final String name;
-  final List<String> inputs;
-  final List<String> outputs;
-  final Widget child;
-
-  _BaseState({
-    @required this.width, 
-    @required this.height, 
-    @required this.position,
-    @required this.name, 
-    @required this.inputs, 
-    @required this.outputs,
-    @required this.child
-  });
  
   @override
   Widget build(BuildContext context) {
@@ -61,9 +29,9 @@ class _BaseState extends State<Base> {
         transform: Matrix4.translationValues(position.dx, position.dy, 0.0),
         child: GestureDetector(
         onPanUpdate: (DragUpdateDetails details) {
-          setState(() {
-            position += details.delta;
-          });
+          // setState(() {
+          //   position += details.delta;
+          // });
         },
         child: Container(
           width: width,
