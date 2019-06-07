@@ -23,7 +23,10 @@ class ModulesBloc extends Bloc<ModulesEvent, List<Module>> {
     if (event is UpdateModule) {
       // currentState[0].position += event.updatedPosition;
       currentState[0] = new Module(currentState[0].position + event.updatedPosition, currentState[0].type);
+      // currentState[0].position += event.updatedPosition;
       print(currentState[0].position);
+
+      yield new List<Module>.from(currentState);
       // print(event);
       // yield List<Module>.from(currentState);
       // return;

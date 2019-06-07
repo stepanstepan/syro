@@ -6,7 +6,7 @@ import 'package:random_string/random_string.dart' as random;
 @immutable
 class Module extends Equatable {
   final String id = random.randomAlphaNumeric(10);
-  final Offset position;
+  Offset position;
   final String type;
 
   Module(this.position, this.type, {String id}) : super([position, type]);
