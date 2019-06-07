@@ -2,9 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:sequencer/modules/socket.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sequencer/bloc/counter_bloc.dart';
+import 'package:sequencer/bloc/counter_events.dart';
+import 'package:sequencer/models/module.dart';
+
 
 class Base extends StatelessWidget {
 
+  final String id;
   final Offset position;
   final double width;
   final double height;
@@ -14,6 +20,7 @@ class Base extends StatelessWidget {
   final Widget child;
 
   Base({
+    @required this.id, 
     @required this.width, 
     @required this.height, 
     @required this.position,
@@ -25,13 +32,13 @@ class Base extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
+    final ModuleBloc _moduleBloc = BlocProvider.of<ModuleBloc>(context);
+
     return Transform(
         transform: Matrix4.translationValues(position.dx, position.dy, 0.0),
         child: GestureDetector(
         onPanUpdate: (DragUpdateDetails details) {
-          // setState(() {
-          //   position += details.delta;
-          // });
+          _moduleBloc.dispatch(UpdateModule(id, details.delta));
         },
         child: Container(
           width: width,

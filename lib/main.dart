@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'screen.dart';
 import 'package:sequencer/bloc/counter_bloc.dart';
-import 'package:sequencer/bloc/counter_events.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,14 +11,14 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  final CounterBloc _counterBloc = CounterBloc();
+  final ModuleBloc _moduleBloc = ModuleBloc();
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: BlocProvider<CounterBloc>(
-        bloc: _counterBloc,
+      child: BlocProvider<ModuleBloc>(
+        bloc: _moduleBloc,
         child: Screen(),
       )
     );
@@ -28,7 +26,7 @@ class MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
-    _counterBloc.dispose();
+    _moduleBloc.dispose();
     super.dispose();
   }
 }

@@ -1,27 +1,37 @@
 import 'package:flutter/gestures.dart';
 import './counter_events.dart';
 import 'package:bloc/bloc.dart';
+import 'package:sequencer/models/module.dart';
 
-class CounterBloc extends Bloc<CounterEvent, List<Offset>> {
-  @override
-  List<Offset> get initialState => [new Offset(100, 150)];
+class ModuleBloc extends Bloc<ModuleEvent, List<Module>> {
+
+  @override 
+  List<Module> get initialState => [
+    new Module(new Offset(190, 300), 'sequencer8')
+  ];
 
   @override
-  Stream<List<Offset>> mapEventToState(CounterEvent event) async* {
-    switch (event) {
-      case CounterEvent.decrement:
-        print('CATCHED decrement');
-        currentState[0] -= new Offset(10, 10);
-        print(currentState);
-        yield []..addAll(currentState);
-        // yield List(currentState[0])
-        break;
-      case CounterEvent.increment:
-        print('CATCHED increment');
-        currentState[0] += new Offset(10, 10);
-        // yield currentState;
-        yield []..addAll(currentState);
-        break;
+  Stream<List<Module>> mapEventToState(
+    ModuleEvent event
+  ) async* {
+    if (event is UpdateModule) {
+      final List<Module> modules = currentState.map((module) {
+        if (module.id == event.id) {
+          return new Module(
+            module.position + event.updatedPosition, 
+            module.type
+          );
+        } else {
+          return module;
+        }
+      }).toList();
+
+      print(modules);
+
+      // currentState[0] = new Module(currentState[0].position + event.updatedPosition, currentState[0].type);
+      // print(currentState);
+      // yield new List<Module>.from(currentState);
+      yield modules;
     }
   }
 }

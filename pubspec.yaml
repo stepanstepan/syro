@@ -25,7 +25,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   markov_dart: ^0.2.0
   flutter_bloc: ^0.14.0
-  meta: ^1.1.6
+  meta: ">=1.1.0 <2.0.0"
+  equatable: ^0.2.0
+  random_string: 0.0.2
 
 dev_dependencies:
   flutter_test:
