@@ -15,7 +15,7 @@ class ModuleBloc extends Bloc<ModuleEvent, List<Module>> {
     ModuleEvent event
   ) async* {
     if (event is UpdateModule) {
-      final List<Module> modules = currentState.map((module) {
+      yield currentState.map((module) {
         if (module.id == event.id) {
           return new Module(
             module.position + event.updatedPosition, 
@@ -26,12 +26,12 @@ class ModuleBloc extends Bloc<ModuleEvent, List<Module>> {
         }
       }).toList();
 
-      print(modules);
+      // print(modules);
 
       // currentState[0] = new Module(currentState[0].position + event.updatedPosition, currentState[0].type);
       // print(currentState);
       // yield new List<Module>.from(currentState);
-      yield modules;
+      //  modules;
     }
   }
 }
