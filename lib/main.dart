@@ -1,31 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'screen.dart';
-import 'package:sequencer/bloc/counter_bloc.dart';
-import 'package:sequencer/bloc/counter_events.dart';
-
-import 'modules/sequencer8.dart';
+import 'package:sequencer/screen.dart';
+import 'package:sequencer/bloc/module/index.dart';
 
 void main() => runApp(MyApp());
-
-// final List<Map<String, double>> modules = [
-//   {"x": 100, "y": 200},
-//   {"x": 300, "y": 400},
-// ];
-
-// class MyApp extends StatelessWidget {
-  
-//   @override
-//   Widget build(BuildContext context) {
-//     return Directionality(
-//       textDirection: TextDirection.ltr,
-//       child: Screen()
-//     );
-//   }
-
-// }
-
 
 class MyApp extends StatefulWidget {
   @override
@@ -33,15 +11,14 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  final CounterBloc _counterBloc = CounterBloc();
+  final ModuleBloc _moduleBloc = ModuleBloc();
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: BlocProvider<CounterBloc>(
-        bloc: _counterBloc,
-        // child: Sequencer8(position: new Offset(100, 200)),
+      child: BlocProvider<ModuleBloc>(
+        bloc: _moduleBloc,
         child: Screen(),
       )
     );
@@ -49,7 +26,7 @@ class MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
-    _counterBloc.dispose();
+    _moduleBloc.dispose();
     super.dispose();
   }
 }

@@ -3,6 +3,11 @@ import 'modules/markov.dart';
 import 'modules/sequencer8.dart';
 import 'modules/wire.dart';
 
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sequencer/bloc/module/index.dart';
+import 'package:sequencer/models/module.dart';
+
 const double DEFAULT_SCALE = 1.0;
 
 class Screen extends StatefulWidget {
@@ -19,6 +24,9 @@ class _ScreenState extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final ModuleBloc _moduleBloc = BlocProvider.of<ModuleBloc>(context);
+
+
     return GestureDetector(
       // behavior: HitTestBehavior.translucent,
       onScaleStart: (ScaleStartDetails details) {
@@ -36,21 +44,30 @@ class _ScreenState extends State<Screen> {
           _offset = newOffset;
         });
       },
-      child: Container(
-        color: Color(0xff0d0d0d),
-        child: Transform(
-          transform: new Matrix4.identity()
-            ..translate(_offset.dx, _offset.dy)
-            ..scale(_scale),
-          child: Stack(
-            children: <Widget>[
-              Sequencer8(position: new Offset(100, 200)),
-              // Markov(position: new Offset(400, 500)),
-              // Wire(start: new Offset(117, 383), end: new Offset(417, 515))
-            ],
-          )
-        )
+      child: BlocBuilder<ModuleEvent, List<Module>>(
+        bloc: _moduleBloc,
+        builder: (BuildContext context, List<Module> modules) {
+          return Container(
+            color: Color(0xff0d0d0d),
+            child: Transform(
+              transform: new Matrix4.identity()
+                ..translate(_offset.dx, _offset.dy)
+                ..scale(_scale),
+              child: Stack(
+                children: modules.map((module) => 
+                  Sequencer8(
+                    id: module.id,
+                    position: module.position
+                  )
+                ).toList()
+              )
+            )
+          );
+        }
       )
+
+
+
     );
   }
 
