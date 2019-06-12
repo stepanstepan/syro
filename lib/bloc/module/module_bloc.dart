@@ -1,5 +1,5 @@
 import 'package:flutter/gestures.dart';
-import './counter_events.dart';
+import './module_events.dart';
 import 'package:bloc/bloc.dart';
 import 'package:sequencer/models/module.dart';
 
@@ -15,11 +15,12 @@ class ModuleBloc extends Bloc<ModuleEvent, List<Module>> {
     ModuleEvent event
   ) async* {
     if (event is UpdateModule) {
-      yield currentState.map((module) {
+      final List<Module> modules = currentState.map((module) {
         if (module.id == event.id) {
           return new Module(
             module.position + event.updatedPosition, 
-            module.type
+            module.type,
+            module.id
           );
         } else {
           return module;
@@ -27,11 +28,7 @@ class ModuleBloc extends Bloc<ModuleEvent, List<Module>> {
       }).toList();
 
       // print(modules);
-
-      // currentState[0] = new Module(currentState[0].position + event.updatedPosition, currentState[0].type);
-      // print(currentState);
-      // yield new List<Module>.from(currentState);
-      //  modules;
+      yield modules;
     }
   }
 }

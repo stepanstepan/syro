@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'screen.dart';
-import 'package:sequencer/bloc/counter_bloc.dart';
+import 'package:sequencer/screen.dart';
+import 'package:sequencer/bloc/module/index.dart';
 
 void main() => runApp(MyApp());
 

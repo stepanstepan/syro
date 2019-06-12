@@ -5,8 +5,7 @@ import 'modules/wire.dart';
 
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sequencer/bloc/counter_bloc.dart';
-import 'package:sequencer/bloc/counter_events.dart';
+import 'package:sequencer/bloc/module/index.dart';
 import 'package:sequencer/models/module.dart';
 
 const double DEFAULT_SCALE = 1.0;

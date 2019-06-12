@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:sequencer/models/module.dart';
 
 @immutable
 abstract class ModuleEvent extends Equatable {

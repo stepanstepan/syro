@@ -3,8 +3,7 @@ import 'package:sequencer/modules/base.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sequencer/bloc/counter_bloc.dart';
-import 'package:sequencer/bloc/counter_events.dart';
+import 'package:sequencer/bloc/module/index.dart';
 import 'package:sequencer/models/module.dart';
 
 class Sequencer8 extends StatelessWidget {

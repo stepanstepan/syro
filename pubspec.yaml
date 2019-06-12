@@ -27,7 +27,7 @@ dependencies:
   flutter_bloc: ^0.14.0
   meta: ">=1.1.0 <2.0.0"
   equatable: ^0.2.0
-  random_string: 0.0.2
+  uuid: 2.0.0
 
 dev_dependencies:
   flutter_test:
