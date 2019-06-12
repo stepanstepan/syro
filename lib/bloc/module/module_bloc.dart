@@ -7,7 +7,8 @@ class ModuleBloc extends Bloc<ModuleEvent, List<Module>> {
 
   @override 
   List<Module> get initialState => [
-    new Module(new Offset(190, 300), 'sequencer8')
+    new Module(new Offset(190, 100), 'sequencer8', 'module_id_1'),
+    new Module(new Offset(400, 300), 'sequencer8', 'module_id_2')
   ];
 
   @override
