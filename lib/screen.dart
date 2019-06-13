@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'modules/markov.dart';
 import 'modules/sequencer8.dart';
 import 'modules/wire.dart';
 
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sequencer/bloc/module/index.dart';
 import 'package:sequencer/models/module.dart';
 
@@ -65,9 +65,6 @@ class _ScreenState extends State<Screen> {
           );
         }
       )
-
-
-
     );
   }
 
