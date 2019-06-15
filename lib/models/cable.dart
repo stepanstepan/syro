@@ -6,31 +6,31 @@ import 'package:uuid/uuid.dart';
 @immutable
 class Cable extends Equatable {
 
-  final String socketOutId;
-  final String socketInId;
-  final Offset socketOutOffset;
-  final Offset socketInOffset;
+  final Offset startPosition;
+  final Offset endPosition;
+  final String startModuleId;
+  final String endModuleId;
   final String id;
 
   Cable(
-    this.socketOutId, 
-    this.socketInId, 
-    this.socketOutOffset, 
-    this.socketInOffset, 
+    this.startPosition, 
+    this.endPosition, 
+    this.startModuleId, 
+    this.endModuleId, 
     [String id]
   ) 
     : this.id = id ?? Uuid().v4(),
       super([
-        socketOutId, 
-        socketInId, 
-        socketOutOffset, 
-        socketInOffset, 
+        startPosition, 
+        endPosition, 
+        startModuleId, 
+        endModuleId, 
         id
       ]);
 
   @override
   String toString() {
-    return 'Cable { id: $id, socketOutId: $socketOutId, socketInId: $socketInId }';
+    return 'Cable { id: $id, startPosition: $startPosition, endPosition: $endPosition }';
   }
 
 }

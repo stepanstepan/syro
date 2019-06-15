@@ -45,30 +45,45 @@ class Base extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
             border: new Border.all(color: Color(0xff0d0d0d))
           ),
-          child: Column(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(10, 7, 10, 10),
-                child: Row(
+                padding: EdgeInsets.all(10),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(children: inputs.map((input) => Socket(name: input)).toList()),
-                    Text(name)
+                    Container(),
+                    ...inputs.map((input) => Socket()).toList(),
+                    Container(),
                   ]
                 )
               ),
               Expanded(
                 child: Container(
+                  // color: Color(0xff00002c),
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: child
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text(name)
+                      ),
+                      child
+                    ],
+                  )
                 )
               ),
               Container(
                 padding: EdgeInsets.all(10),
-                child: Row(
-                  children: outputs.map((input) => Socket(name: input)).toList()
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(),
+                    ...outputs.map((input) => Socket()).toList(),
+                    Container(),
+                  ]
                 )
               )
             ]

@@ -23,15 +23,28 @@ class CurvePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
 
+    // Path path = Path();
+    // path.moveTo(start.dx, start.dy);
+    // final Offset middle = new Offset(start.dx + (end.dx - start.dx) / 2, start.dy + (end.dy - start.dy) / 2);
+    // final double distance = sqrt(pow(end.dx - start.dx, 2) + pow(end.dy - start.dy, 2));
+
+
+    // path.quadraticBezierTo(
+    //   middle.dx,
+    //   middle.dy + distance * .25,
+    //   end.dx, 
+    //   end.dy
+    // );
+    // canvas.drawPath(path, paint);
+
     Path path = Path();
     path.moveTo(start.dx, start.dy);
-    final Offset middle = new Offset(start.dx + (end.dx - start.dx) / 2, start.dy + (end.dy - start.dy) / 2);
-    final double distance = sqrt(pow(end.dx - start.dx, 2) + pow(end.dy - start.dy, 2));
+    path.cubicTo(
+      start.dx + min(100, (start.dx - end.dx).abs() / 2), 
+      start.dy, 
 
-
-    path.quadraticBezierTo(
-      middle.dx,
-      middle.dy + distance * .25,
+      end.dx - min(100, (start.dx - end.dx).abs() / 2),
+      end.dy, 
       end.dx, 
       end.dy
     );

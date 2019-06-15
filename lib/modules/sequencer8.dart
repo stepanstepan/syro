@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sequencer/modules/base.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sequencer/bloc/module/index.dart';
-import 'package:sequencer/models/module.dart';
 
 class Sequencer8 extends StatelessWidget {
 
@@ -18,22 +14,15 @@ class Sequencer8 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ModuleBloc _moduleBloc = BlocProvider.of<ModuleBloc>(context);
-
-    return BlocBuilder<ModuleEvent, List<Module>>(
-      bloc: _moduleBloc,
-      builder: (BuildContext context, List<Module> modules) {
-        return Base(
-          id: id,
-          position: position,
-          width: 500,
-          height: 250,
-          name: 'Sequencer 8',
-          inputs: ['clock in'],
-          outputs: ['cv out', 'gate out'],
-          child: Text('hello there')
-        );
-      }
+    return Base(
+      id: id,
+      position: position,
+      width: 350,
+      height: 150,
+      name: 'Sequencer 8',
+      inputs: ['clock_in', 'gate_in', 'third_in'],
+      outputs: ['cv_out', 'gate_out'],
+      child: Text('hello there')
     );
   }
 

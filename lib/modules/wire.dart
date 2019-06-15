@@ -2,29 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:sequencer/curve_painter.dart';
 import 'package:sequencer/modules/socket.dart';
 
-class Wire extends StatefulWidget {
+
+class Wire extends StatelessWidget {
 
   Offset start;
   Offset end;
 
   Wire({
-    @required this.start, 
-    @required this.end
-  });
-
-  @override
-  State<Wire> createState() => _WireState(
-    start: start,
-    end: end
-  );
-}
-
-class _WireState extends State<Wire> {
-
-  Offset start;
-  Offset end;
-
-  _WireState({
     @required this.start, 
     @required this.end
   });
@@ -48,9 +32,9 @@ class _WireState extends State<Wire> {
           child: GestureDetector(
             behavior: HitTestBehavior.deferToChild,
             onPanUpdate: (DragUpdateDetails details) {
-              setState(() {
-                start += details.delta;
-              });
+              // setState(() {
+              //   start += details.delta;
+              // });
             },
             child: Socket(filled: true)
           )
@@ -60,9 +44,9 @@ class _WireState extends State<Wire> {
           child: GestureDetector(
             behavior: HitTestBehavior.deferToChild,
             onPanUpdate: (DragUpdateDetails details) {
-              setState(() {
-                end += details.delta;
-              });
+              // setState(() {
+              //   end += details.delta;
+              // });
             },
             child: Socket(filled: true)
           )

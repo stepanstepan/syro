@@ -6,7 +6,6 @@ import 'modules/sequencer8.dart';
 import 'modules/wire.dart';
 
 import 'package:sequencer/bloc/module/index.dart';
-import 'package:sequencer/bloc/cable/index.dart';
 import 'package:sequencer/models/module.dart';
 import 'package:sequencer/models/cable.dart';
 
@@ -27,7 +26,6 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     final ModuleBloc _moduleBloc = BlocProvider.of<ModuleBloc>(context);
-    final CableBloc _cableBloc = BlocProvider.of<CableBloc>(context);
 
     return GestureDetector(
       // behavior: HitTestBehavior.translucent,
@@ -46,42 +44,33 @@ class _ScreenState extends State<Screen> {
           _offset = newOffset;
         });
       },
-      child: BlocBuilder<ModuleEvent, List<Module>>(
+      child: BlocBuilder<ModuleEvent, List<dynamic>>(
         bloc: _moduleBloc,
-        builder: (BuildContext context, List<Module> modules) {
-
-          return BlocBuilder<CableEvent, List<Cable>>(
-            bloc: _cableBloc,
-            builder: (BuildContext context, List<Cable> cables) {
-
-              return Container(
-                color: Color(0xff0d0d0d),
-                child: Transform(
-                  transform: new Matrix4.identity()
-                    ..translate(_offset.dx, _offset.dy)
-                    ..scale(_scale),
-                  child: Stack(
-                    children: [
-                      ...modules.map((module) => 
-                        Sequencer8(
-                          id: module.id,
-                          position: module.position
-                        )
-                      ).toList(),
-                      ...cables.map((cable) => 
-                        Wire(
-                          start: cable.socketInOffset,
-                          end: cable.socketOutOffset
-                        )
-                      ).toList()
-                    ]
-                  )
-                )
-              );
-              
-            }
+        builder: (BuildContext context, List<dynamic> modules) {
+          return Container(
+            color: Color(0xff0d0d0d),
+            child: Transform(
+              transform: new Matrix4.identity()
+                ..translate(_offset.dx, _offset.dy)
+                ..scale(_scale),
+              child: Stack(
+                children: 
+                  modules.map((module) { 
+                    if (module is Module) {
+                      return Sequencer8(
+                        id: module.id,
+                        position: module.position
+                      );
+                    } else {
+                      return Wire(
+                        start: module.startPosition, 
+                        end: module.endPosition
+                      );
+                    }
+                  }).toList()
+              )
+            )
           );
-
         }
       )
     );
