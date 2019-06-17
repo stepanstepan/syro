@@ -1,16 +1,16 @@
+import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:sequencer/curve_painter.dart';
 import 'package:sequencer/modules/socket.dart';
 
-
 class Wire extends StatelessWidget {
 
-  Offset start;
-  Offset end;
+  final Offset source;
+  final Offset target;
 
   Wire({
-    @required this.start, 
-    @required this.end
+    @required this.source, 
+    @required this.target
   });
 
   @override
@@ -22,13 +22,13 @@ class Wire extends StatelessWidget {
           isComplex: true, 
           willChange: true,
           painter: CurvePainter(
-            start: start,
-            end: end,
+            start: source,
+            end: target,
             color: 0xffff7f17
           )
         ),
         Transform(
-          transform: Matrix4.translationValues(start.dx - 7.0, start.dy - 7.0, 0.0),
+          transform: Matrix4.translationValues(source.dx - 7.0, source.dy - 7.0, 0.0),
           child: GestureDetector(
             behavior: HitTestBehavior.deferToChild,
             onPanUpdate: (DragUpdateDetails details) {
@@ -40,7 +40,7 @@ class Wire extends StatelessWidget {
           )
         ),
         Transform(
-          transform: Matrix4.translationValues(end.dx - 7.0, end.dy - 7.0, 0.0),
+          transform: Matrix4.translationValues(target.dx - 7.0, target.dy - 7.0, 0.0),
           child: GestureDetector(
             behavior: HitTestBehavior.deferToChild,
             onPanUpdate: (DragUpdateDetails details) {

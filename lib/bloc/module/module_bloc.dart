@@ -3,58 +3,47 @@ import './module_events.dart';
 import 'package:bloc/bloc.dart';
 import 'package:sequencer/models/module.dart';
 import 'package:sequencer/models/cable.dart';
+import 'package:sequencer/models/sequencer8.dart';
 
-class ModuleBloc extends Bloc<ModuleEvent, List<dynamic>> {
+class ModuleBloc extends Bloc<ModuleEvent, Map<String, dynamic>> {
 
   @override 
-  List<dynamic> get initialState => [
-    Module(Offset(80, 100), 'sequencer8', 'module_id_1'),
-    Module(Offset(500, 300), 'sequencer8', 'module_id_2'),
-    Cable(Offset(412, 151.5), Offset(518, 339), 'module_id_1', 'module_id_2')
-  ];
+  Map<String, dynamic> get initialState => {
+    'module_id_1': Sequencer8(Offset(80, 100), 'module_id_1'),
+    'module_id_2': Sequencer8(Offset(500, 300), 'module_id_2'),
+    'cable_id_1': Cable(['module_id_1', 'note_out'], ['module_id_2', 'note_in']),
+    'cable_id_2': Cable(['module_id_1', 'note_out'], ['module_id_2', 'reset_in']),
+  };
 
   @override
-  Stream<List<dynamic>> mapEventToState(
+  Stream<Map<String, dynamic>> mapEventToState(
     ModuleEvent event
   ) async* {
     if (event is UpdateModule) {
-      final List<dynamic> elements = currentState.map((node) {
-        if (node is Module) {
-          if (node.id == event.id) {
-            return Module(
-              node.position + event.updatedPosition, 
-              node.type,
-              node.id
-            );
-          } else {
-            return node;
-          }
-        } else {
-          if (node.startModuleId == event.id) {
-            return Cable(
-              node.startPosition + event.updatedPosition,
-              node.endPosition,
-              node.startModuleId,
-              node.endModuleId,
-              node.id
-            );
-          } else if (node.endModuleId == event.id) {
-            return Cable(
-              node.startPosition,
-              node.endPosition + event.updatedPosition,
-              node.startModuleId,
-              node.endModuleId,
-              node.id
-            );
-          } else {
-            return node;
-          }
-        }
-      }).toList();
+      currentState[event.id] = Sequencer8(
+        currentState[event.id].position + event.updatedPosition, 
+        currentState[event.id].id
+      );
 
-      // print(elements);
+      yield new Map<String, dynamic>.from(currentState);
 
-      yield elements;
+         
+
+      // final List<dynamic> elements = currentState.map((node) {
+      //   if (node.id == event.id) {
+      //     return Module(
+      //       node.position + event.updatedPosition, 
+      //       node.type,
+      //       node.id
+      //     );
+      //   } else {
+      //     return node;
+      //   }
+      // }).toList();
+
+      // // print(elements);
+
+      // yield elements;
     }
   }
 }

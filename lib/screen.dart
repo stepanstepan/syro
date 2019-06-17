@@ -44,9 +44,9 @@ class _ScreenState extends State<Screen> {
           _offset = newOffset;
         });
       },
-      child: BlocBuilder<ModuleEvent, List<dynamic>>(
+      child: BlocBuilder<ModuleEvent, Map<String, dynamic>>(
         bloc: _moduleBloc,
-        builder: (BuildContext context, List<dynamic> modules) {
+        builder: (BuildContext context, Map<String, dynamic> nodes) {
           return Container(
             color: Color(0xff0d0d0d),
             child: Transform(
@@ -55,16 +55,16 @@ class _ScreenState extends State<Screen> {
                 ..scale(_scale),
               child: Stack(
                 children: 
-                  modules.map((module) { 
-                    if (module is Module) {
-                      return Sequencer8(
-                        id: module.id,
-                        position: module.position
+                  nodes.entries.map((node) {
+                    if (node.value is Module) {
+                      return Sequencer8Node(
+                        id: node.key, 
+                        position: node.value.position
                       );
                     } else {
                       return Wire(
-                        start: module.startPosition, 
-                        end: module.endPosition
+                        source: nodes[node.value.source[0]].position + nodes[node.value.source[0]].outputs[node.value.source[1]], 
+                        target: nodes[node.value.target[0]].position + nodes[node.value.target[0]].inputs[node.value.target[1]],
                       );
                     }
                   }).toList()

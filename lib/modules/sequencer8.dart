@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sequencer/modules/base.dart';
 import 'package:flutter/material.dart';
+import 'package:sequencer/models/sequencer8.dart';
 
-class Sequencer8 extends StatelessWidget {
+class Sequencer8Node extends StatelessWidget {
 
   final Offset position;
   final String id;
 
-  Sequencer8({
+  Sequencer8Node({
     @required this.position,
     @required this.id
   });
@@ -17,11 +18,11 @@ class Sequencer8 extends StatelessWidget {
     return Base(
       id: id,
       position: position,
-      width: 350,
-      height: 150,
+      width: Sequencer8.width,
+      height: Sequencer8.height,
       name: 'Sequencer 8',
-      inputs: ['clock_in', 'gate_in', 'third_in'],
-      outputs: ['cv_out', 'gate_out'],
+      inputs: Sequencer8.inputsList,
+      outputs: Sequencer8.outputsList,
       child: Text('hello there')
     );
   }
