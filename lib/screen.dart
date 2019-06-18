@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'modules/markov.dart';
-import 'modules/sequencer8.dart';
 import 'modules/wire.dart';
+
+import 'package:sequencer/nodes/index.dart';
 
 import 'package:sequencer/bloc/module/index.dart';
 import 'package:sequencer/models/module.dart';
@@ -56,16 +57,25 @@ class _ScreenState extends State<Screen> {
               child: Stack(
                 children: 
                   nodes.entries.map((node) {
-                    if (node.value is Module) {
-                      return Sequencer8Node(
+                    if (node.value is Clock) {
+                      return ClockWidget(
                         id: node.key, 
                         position: node.value.position
                       );
-                    } else {
+                    } else if (node.value is StepSequencer) {
+                      return StepSequencerWidget(
+                        id: node.key, 
+                        position: node.value.position
+                      );
+                    } else if (node.value is Cable) {
+                      // final test = nodes[node.value.source[0]];
+                      // return Text('$test');
                       return Wire(
                         source: nodes[node.value.source[0]].position + nodes[node.value.source[0]].outputs[node.value.source[1]], 
                         target: nodes[node.value.target[0]].position + nodes[node.value.target[0]].inputs[node.value.target[1]],
                       );
+                    } else {
+                      return Text('$node.value is not found');
                     }
                   }).toList()
               )

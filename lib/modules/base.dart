@@ -70,7 +70,7 @@ class Base extends StatelessWidget {
                         padding: EdgeInsets.all(10),
                         child: Text(name)
                       ),
-                      child
+                      child ?? Container()
                     ],
                   )
                 )
