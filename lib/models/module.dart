@@ -7,16 +7,15 @@ import 'package:uuid/uuid.dart';
 class Module extends Equatable {
   
   final Offset position;
-  final String type;
   final String id;
 
-  Module(this.position, this.type, [String id]) 
+  Module(this.position, [String id]) 
     : this.id = id ?? Uuid().v4(),
-      super([position, type, id]);
+      super([position, id]);
 
   @override
   String toString() {
-    return 'Module { id: $id, position: $position, type: $type }';
+    return 'Module { id: $id, position: $position }';
   }
 
 }
