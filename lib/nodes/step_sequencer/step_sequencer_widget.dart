@@ -15,7 +15,8 @@ class StepSequencerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('build step sequencer ${id}');
+    print('build step sequencer $id');
+    print(StepSequencer.inputNames);
     
     return Base(
       id: id,
@@ -23,11 +24,11 @@ class StepSequencerWidget extends StatelessWidget {
       width: StepSequencer.width,
       height: StepSequencer.height,
       name: 'Sequencer 8',
-      inputs: ['wd', 'wd'],
-      outputs: ['wd', 'wd'],
+      // inputs: ['Clock', 'Start', 'Length'],
+      inputs: ['Clock', 'Start', 'Length'],
+      outputs: ['Note'],
       child: Text('hello there')
     );
   }
 
 }
-

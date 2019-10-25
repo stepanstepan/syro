@@ -1,13 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'modules/markov.dart';
-import 'modules/wire.dart';
-
+import 'package:sequencer/modules/wire.dart';
 import 'package:sequencer/nodes/index.dart';
-
 import 'package:sequencer/bloc/module/index.dart';
-import 'package:sequencer/models/module.dart';
 import 'package:sequencer/models/cable.dart';
 
 const double DEFAULT_SCALE = 1.0;

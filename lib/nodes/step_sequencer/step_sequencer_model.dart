@@ -2,22 +2,63 @@ import 'package:sequencer/models/module.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/gestures.dart';
 
+const double _width = 350;
+const double _height = 150;
+
+const _inputs = {
+  'clock_in': {
+    'position': Offset(13, 18),
+    'name': 'Clock'
+  },
+  'start_in': {
+    'position': Offset(13, 42),
+    'name': 'Start'
+  },
+  'length_in': {
+    'position': Offset(13, 98),
+    'name': 'Length'
+  }
+};
+const _outputs = {
+  'note_out': {
+    'position': Offset(_width - 23, 18),
+    'name': 'Note Out'
+  }
+};
+
 @immutable
 class StepSequencer extends Module {
 
-  static final double width = 350;
-  static final double height = 150;
+  // static final double width = 350;
+  // static final double height = 150;
+
+  StepSequencer(position, id) : super(position, id);
 
   final Map<String, Offset> inputs = {
-    'note_in': Offset(17.5, 52),
-    'reset_in': Offset(17.5, 98),
+    'clock_in': Offset(13, 18),
+    'start_in': Offset(13, 42),
+    'length_in': Offset(13, 98),
   };
 
   final Map<String, Offset> outputs = {
-    'note_out': Offset(width - 17.5, 75)
+    'note_out': Offset(width - 23, 18)
   };
 
-  StepSequencer(position, id) : super(position, id);
+  static get width {
+    return _width;
+  }
+
+  static get height {
+    return _height;
+  }
+
+  static List<String> get inputNames {
+    return _inputs.values.map((input) => input['name']).toList();
+  }
+
+  static get outputNames {
+    return _outputs.keys;
+  }
 
   String toString() {
     return 'StepSequencer { id: $id, position: $position }';

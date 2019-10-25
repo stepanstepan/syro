@@ -76,6 +76,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.0"
+  flutter_midi_command:
+    dependency: "direct main"
+    description:
+      name: flutter_midi_command
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.8"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -117,7 +124,7 @@ packages:
     source: hosted
     version: "1.7.0"
   quiver:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: quiver
       url: "https://pub.dartlang.org"
@@ -199,4 +206,4 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
-  dart: ">=2.2.0 <3.0.0"
+  dart: ">=2.2.2 <3.0.0"

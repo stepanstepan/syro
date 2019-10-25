@@ -19,3 +19,14 @@ class UpdateModule extends ModuleEvent {
   @override
   String toString() => 'UpdateModule { updatedPosition: $updatedPosition, id: $id }';
 }
+
+class StartModule extends ModuleEvent {
+  final String id;
+
+  StartModule(
+    this.id,
+  );
+
+  @override
+  String toString() => 'StartModule { id: $id }';
+}

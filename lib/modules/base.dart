@@ -50,19 +50,16 @@ class Base extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                // color: Color(0xff0d0dff),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    ...inputs.map((input) => Socket()).toList(),
-                    Container(),
-                  ]
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: inputs.map((input) => Socket(name: input, input: true)).toList()
                 )
               ),
               Expanded(
                 child: Container(
-                  // color: Color(0xff00002c),
+                  color: Color(0xff00002c).withOpacity(0.3),
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: Column(
                     children: [
@@ -76,14 +73,10 @@ class Base extends StatelessWidget {
                 )
               ),
               Container(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    ...outputs.map((input) => Socket()).toList(),
-                    Container(),
-                  ]
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: outputs.map((output) => Socket(name: output, input: false)).toList()
                 )
               )
             ]

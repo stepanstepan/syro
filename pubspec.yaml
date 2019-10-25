@@ -28,6 +28,8 @@ dependencies:
   meta: ">=1.1.0 <2.0.0"
   equatable: ^0.2.0
   uuid: 2.0.0
+  quiver: ">=2.0.0 <3.0.0"
+  flutter_midi_command: 0.0.8
 
 dev_dependencies:
   flutter_test:
